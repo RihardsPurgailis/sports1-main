@@ -34,6 +34,12 @@ export default function Home() {
             >
               Camps/Tryouts
             </Link>
+            <Link
+              href="/post/create"
+              className="inline-block px-6 py-3 bg-white text-black font-bold text-lg rounded-md border border-gray-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50 transition duration-150 ease-in-out mb-4 sm:mb-0"
+            >
+              Create Post
+            </Link>
           </div>
         </section>
       </div>
