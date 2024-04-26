@@ -130,8 +130,13 @@ const PostForm = ({ userId, type}: EventFormProps) => {
                             className="filter-grey"
                             /> 
                             <p className="ml-3 whitespace-nowrap text-grey-600">Start Date:</p>
-                            <DatePicker selected={field.value} onChange={(date: Date) => field.onChange(date)}
-                            showTimeSelect timeInputLabel="Time" dateFormat="MM/dd/yyyy h:mm aa" wrapperClassName="datePicker" />
+                            <DatePicker 
+                        selected={field.value} 
+                        onChange={(date: Date | any) => field.onChange(date)} 
+                        showTimeSelect
+                        timeInputLabel="Time:"
+                        dateFormat="MM/dd/yyyy h:mm aa"
+                        wrapperClassName="datePicker" />
                         </div>
                     </FormControl>
                     <FormMessage />
@@ -154,7 +159,7 @@ const PostForm = ({ userId, type}: EventFormProps) => {
                             className="filter-grey"
                             /> 
                             <p className="ml-3 whitespace-nowrap text-grey-600">End Date:</p>
-                            <DatePicker selected={field.value} onChange={(date: Date) => field.onChange(date)}
+                            <DatePicker selected={field.value} onChange={(date: Date | any) => field.onChange(date)}
                             showTimeSelect timeInputLabel="Time" dateFormat="MM/dd/yyyy h:mm aa" wrapperClassName="datePicker" />
                         </div>
                     </FormControl>
