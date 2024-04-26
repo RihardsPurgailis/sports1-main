@@ -16,6 +16,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Date } from "mongoose"
+import { Checkbox } from "../ui/checkbox"
 
 
 
@@ -36,8 +37,7 @@ const PostForm = ({ userId, type}: EventFormProps) => {
  
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof eventFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    const eventData = values
     console.log(values)
   }
 
@@ -130,7 +130,32 @@ const PostForm = ({ userId, type}: EventFormProps) => {
                             className="filter-grey"
                             /> 
                             <p className="ml-3 whitespace-nowrap text-grey-600">Start Date:</p>
-                            <DatePicker selected={field.value} onChange={(date: Date) => field.onChange(date)} />
+                            <DatePicker selected={field.value} onChange={(date: Date) => field.onChange(date)}
+                            showTimeSelect timeInputLabel="Time" dateFormat="MM/dd/yyyy h:mm aa" wrapperClassName="datePicker" />
+                        </div>
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+
+            <FormField
+                control={form.control}
+                name="endDateTime"
+                render={({ field }) => (
+                <FormItem className="w-full">
+                    <FormControl>
+                        <div className="flex-center h-[54px] w-full overflow-hidden rounded-2xl bg-gray-50 px-4 py-2 border-2">
+                            <Image 
+                            src="/assets/icons/calendar.svg"
+                            alt="calendar"
+                            width={24}
+                            height={24}
+                            className="filter-grey"
+                            /> 
+                            <p className="ml-3 whitespace-nowrap text-grey-600">End Date:</p>
+                            <DatePicker selected={field.value} onChange={(date: Date) => field.onChange(date)}
+                            showTimeSelect timeInputLabel="Time" dateFormat="MM/dd/yyyy h:mm aa" wrapperClassName="datePicker" />
                         </div>
                     </FormControl>
                     <FormMessage />
@@ -139,7 +164,77 @@ const PostForm = ({ userId, type}: EventFormProps) => {
             />
         </div>
 
-        <Button type="submit">Submit</Button>
+
+        <div className="flex flex-col gap-5 md:flex-row">
+        <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                <FormItem className="w-full">
+                    <FormControl>
+                        <div className="flex-center h-[54px] w-full overflow-hidden rounded-2xl bg-gray-50 px-4 py-2 border-2">
+                            <Image 
+                            src="/assets/icons/dollar.svg"
+                            alt="dollar"
+                            width={24}
+                            height={24}
+                            className="filter-grey"
+                            />
+                            <Input type="number" placeholder="price" {...field} 
+                            className="p-regular-16 border-0 bg-gray-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0" />
+                              <FormField
+                                control={form.control}
+                                name="isFree"
+                                render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <div className="flex items-center">
+                                          <label htmlFor="isFree" className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Free</label>
+                                          <Checkbox id="isFree" onCheckedChange={field.onChange} checked={field.value} className="mr-2 h-5 w-5 border-2 border-black" />
+                                        </div>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
+                        </div>
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+
+
+           <FormField
+                control={form.control}
+                name="url"
+                render={({ field }) => (
+                <FormItem className="w-full">
+                    <FormControl>
+                        <div className="flex-center h-[54px] w-full overflow-hidden rounded-2xl bg-gray-50 px-4 py-2 border-2">
+                            <Image 
+                            src="/assets/icons/link.svg"
+                            alt="link"
+                            width={24}
+                            height={24}
+                            /> 
+                            <Input placeholder="URL" {...field} className="input-field border-none" />
+                        </div>
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+
+
+        </div>
+
+        <Button
+        type="submit"
+        size="lg"
+        disabled={form.formState.isSubmitting}
+        className="button col-span-2w-full bg-black"
+        >{form.formState.isSubmitting ? 'Submitting..' : `${type} Event Nigga`}</Button>
       </form>
     </Form>
   )
